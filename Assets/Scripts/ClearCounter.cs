@@ -6,35 +6,25 @@ public class ClearCounter : MonoBehaviour, IKitchenObjectParent
 {
     [SerializeField] private KitchenObjectSO KitchenObjectSO;
     [SerializeField] private Transform counterTopPoint;
-    [SerializeField] private ClearCounter secondClearCounter;
-    [SerializeField] private bool testing;
+    
 
     private KitchenObject kitchenObject;
 
-    private void Update()
-    {
-        if(testing && Input.GetKeyDown(KeyCode.T))
-        {
-            if(kitchenObject != null)
-            {
-                kitchenObject.SetClearCounter(secondClearCounter);
-            }
-        }
-    }
+    
     public void Interact(Player player)
     {
         if (kitchenObject == null)
         {
             Transform KitchenObjectTransform = Instantiate(KitchenObjectSO.prefab, counterTopPoint);
-            KitchenObjectTransform.GetComponent<KitchenObject>().SetClearCounter(this);
+            KitchenObjectTransform.GetComponent<KitchenObject>().SetIKitchenObjectParent(this);
            
         }
         else
         {
             //give the object to the player
-            kitchenObject.SetClearCounter(player);
+            kitchenObject.SetIKitchenObjectParent(player);
 
-            Debug.Log(kitchenObject.GetClearCounter());
+           // Debug.Log(kitchenObject.GetClearCounter());
         }
         
         
